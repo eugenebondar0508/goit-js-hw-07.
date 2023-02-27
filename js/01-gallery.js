@@ -36,10 +36,15 @@ gallery.addEventListener('click', event => {
     <img src="${selectedImage}" width="800" height="600">`)
 
     instance.show()
+
+    if (instance.visible()) {
+      window.addEventListener("keydown", onPressKeyESC);
+    }
     
-    gallery.addEventListener('keydown', event => {
-		if (event.key === 'Escape') {
-			instance.close()
-		}
-	})
+    function onPressKeyESC(event) {
+      if (event.code === "Escape") {
+        instance.close();
+        window.removeEventListener("keydown", onPressKeyESC);
+      }
+    }
 })
